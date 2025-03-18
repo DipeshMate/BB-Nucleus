@@ -12,7 +12,8 @@ from rest_framework_simplejwt.views import (
 # from accounts.views import CookieTokenObtainPairView, CookieTokenRefreshView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/',include('admin_honeypot.urls', name='admin_honeypot')),
+    path('mysecurelogin/', admin.site.urls),
     path('',include('bats.urls')),
     path('',include('cart.urls')),
     path('',include('accounts.urls')),
