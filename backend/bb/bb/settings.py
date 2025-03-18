@@ -1,10 +1,10 @@
 from pathlib import Path
 from datetime import timedelta
+import os
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -119,7 +120,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = '/media/'  # The base URL for media files
 MEDIA_ROOT = BASE_DIR/ 'media' # Where media files are stored on the server
 
@@ -146,17 +148,6 @@ SIMPLE_JWT = {
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': False,
     'AUTH_HEADER_TYPES': ('Bearer',),
-    # 'SIGNING_KEY': SECRET_KEY,  # 🔹 Ensure this key is defined!
-   
-    # # ✅ These settings are required for setting cookies properly
-    # 'AUTH_COOKIE': 'access_token',  
-    # 'AUTH_COOKIE_REFRESH': 'refresh_token',
-    
-    #  # 🔹 Cookie Settings
-    # 'AUTH_COOKIE_HTTP_ONLY': True,  
-    # 'AUTH_COOKIE_SECURE': False,  # Set True in production (HTTPS required)
-    # 'AUTH_COOKIE_PATH': '/',
-    # 'AUTH_COOKIE_SAMESITE': 'Lax',  # Change to 'None' if using cross-origin requests
 }
 
 
@@ -164,23 +155,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5183",
     "http://127.0.0.1:8989",
 ]
-# CORS_ALLOW_ALL_ORIGINS = True  # ⚠️ Remove this in production!
 
-# CORS_ALLOW_CREDENTIALS = True
-# CORS_ALLOW_HEADERS = ["Authorization", "Content-Type", "X-CSRFToken"]
-# CORS_ALLOW_METHODS = ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-# CORS_EXPOSE_HEADERS = ["Set-Cookie"]  # ✅ Allows browser to see cookies
-
-# CSRF_TRUSTED_ORIGINS = [
-#     "http://localhost:3000  ",
-#     "http://127.0.0.1:8000",
-# ]
-# CSRF_COOKIE_HTTPONLY = False
-# CSRF_COOKIE_SECURE = False # Set False in development
-# CSRF_COOKIE_SAMESITE = 'Lax'
-
-
-# # Custom setting to control cookie security
-# JWT_COOKIE_SECURE = False  # Set True for production (HTTPS)
-# SESSION_COOKIE_SECURE = False
-# # JWT_COOKIE_SECURE = True  # Ensure JWT cookies are secure
+REACT_BASE_URL = os.getenv("REACT_BASE_URL","http://localhost:5173")
