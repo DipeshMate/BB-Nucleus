@@ -70,6 +70,14 @@ TEMPLATES = [
     },
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5183",
+    "http://127.0.0.1:8989",
+    "https://bb-nucleus-ma6o.onrender.com",
+]
+
+REACT_BASE_URL = os.getenv("REACT_BASE_URL","http://localhost:5183")
+
 WSGI_APPLICATION = 'bb.wsgi.application'
 
 
@@ -149,12 +157,3 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': False,
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
-
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5183",
-    "http://127.0.0.1:8989",
-    "https://bb-nucleus-ma6o.onrender.com",
-]
-
-REACT_BASE_URL = os.getenv("REACT_BASE_URL","http://localhost:5183")
