@@ -5,9 +5,9 @@ import { jwtDecode } from "jwt-decode";
 // on every request of api & token this file is created, we dont have to manually add token & for the route 
 // export const BASE_URL = "http://127.0.0.1:8989/";
 
-export const BASE_URL = import.meta.env.VITE_BASE_URL || "http://127.0.0.1:8989";
+export const BASE_URL = import.meta.env.VITE_BASE_URL || "http://127.0.0.1:8989/";
 const api = axios.create({
-    baseURL: BASE_URL,
+    baseURL: BASE_URL
 }
 );
 
