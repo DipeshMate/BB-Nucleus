@@ -154,6 +154,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5183",
     "http://127.0.0.1:8989",
+    "https://bb-nucleus-ma6o.onrender.com",
 ]
 
-REACT_BASE_URL = os.getenv("REACT_BASE_URL","http://localhost:5173")
+REACT_BASE_URL = os.getenv("REACT_BASE_URL","http://localhost:5183")
