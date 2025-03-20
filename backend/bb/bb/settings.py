@@ -16,7 +16,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG',default=True, cast=bool)
 
 
-ALLOWED_HOSTS = ["bb-nucleus.onrender.com","localhost","127.0.0.1"]
+ALLOWED_HOSTS = ["bb-nucleus.onrender.com","127.0.0.1","localhost"]
 
 
 AUTH_USER_MODEL = 'accounts.CustomUser'

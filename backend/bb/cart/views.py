@@ -17,7 +17,7 @@ class AddToCartModelViewSet(ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartSerializers #cartitem serialize tha
     authentication_classes= [JWTAuthentication] # will only authenticate user & pass jwtAuth works
-    permission_classes=[AllowAny] #default for all functions
+    permission_classes=[IsAuthenticated] #default for all functions
     
     @action(detail=False, methods=['post'], url_path='add',permission_classes=[AllowAny])
     def add_to_cart(self, request):
