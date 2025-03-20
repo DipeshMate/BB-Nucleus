@@ -1,7 +1,7 @@
 from pathlib import Path
 from datetime import timedelta
 import os
-from decouple import Config, RepositoryEnv
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -9,19 +9,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 # SECURITY WARNING: keep the secret key used in production secret!
-# Use .env.backend locally, but fallback to Render environment variables in production
-env_file = BASE_DIR / ".env.backend"
-if env_file.exists():
-    config = Config(RepositoryEnv(env_file))
-    SECRET_KEY = config("SECRET_KEY")
-    DEBUG = config("DEBUG", default=True, cast=bool)
-else:
-    SECRET_KEY = os.getenv("SECRET_KEY")
-    DEBUG = os.getenv("DEBUG", default="True").lower() == "true"
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG',default=True, cast=bool)
-
 
 ALLOWED_HOSTS = ["bb-nucleus.onrender.com","127.0.0.1","localhost"]
 
@@ -153,7 +144,7 @@ REST_FRAMEWORK = {
         # 'accounts.authentication.CookieJWTAuthentication',  # Custom authentication
    ),
    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.AllowAny',
    ),
 }
